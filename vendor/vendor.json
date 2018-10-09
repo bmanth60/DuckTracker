@@ -1,0 +1,37 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "CSPbwbyzqA6sfORicn4HFtIhF/c=",
+			"path": "github.com/davecgh/go-spew/spew",
+			"revision": "d8f796af33cc11cb798c1aaeb27a4ebc5099927d",
+			"revisionTime": "2018-08-30T19:11:22Z"
+		},
+		{
+			"checksumSHA1": "LuFv4/jlrmFNnDb/5SCSEPAM9vU=",
+			"path": "github.com/pmezard/go-difflib/difflib",
+			"revision": "792786c7400a136282c1664665ae0a8db921c6c2",
+			"revisionTime": "2016-01-10T10:55:54Z"
+		},
+		{
+			"checksumSHA1": "yEqObY2i8tbWEB4e/oVJDURhMf4=",
+			"path": "github.com/stretchr/testify/assert",
+			"revision": "2db35c88b92a1631e987089b5485a95e68bc5d3a",
+			"revisionTime": "2018-10-02T11:39:27Z"
+		},
+		{
+			"checksumSHA1": "wnEANt4k5X/KGwoFyfSSnpxULm4=",
+			"path": "github.com/stretchr/testify/require",
+			"revision": "2db35c88b92a1631e987089b5485a95e68bc5d3a",
+			"revisionTime": "2018-10-02T11:39:27Z"
+		},
+		{
+			"checksumSHA1": "uefllr2OtKBGo/kQSAPbW3w6p0A=",
+			"path": "github.com/stretchr/testify/suite",
+			"revision": "2db35c88b92a1631e987089b5485a95e68bc5d3a",
+			"revisionTime": "2018-10-02T11:39:27Z"
+		}
+	],
+	"rootPath": "github.com/bmanth60/DuckTracker"
+}

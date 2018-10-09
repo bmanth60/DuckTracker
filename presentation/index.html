@@ -1,0 +1,28 @@
+<html>
+<head>
+       <title>Duck Tracker</title>
+</head>
+<body>
+    <h1>{{ .Title }}</h1>
+    <div class="message" style="border:1px solid black; min-height:30px; padding: 5px;">
+        {{ range $index, $message := .Messages }}
+            <span>{{ $message }}</span></br>
+        {{ end }}
+    </div>
+    <form enctype="multipart/form-data" method="post">
+        <div>
+            {{ range $index, $name := .UploadNames }}
+                <div>
+                    <h2>{{ printf "%d. Upload %s" $index $name }}</h2>
+                    <input type="file" name="{{ $name }}" />
+                </div>
+            {{ end }}
+        </div>
+        <br />
+        <div>
+            <input type="hidden" name="token" value="{{.Token}}" />
+            <input type="submit" value="import" />
+        </div>
+    </form>
+</body>
+</html>

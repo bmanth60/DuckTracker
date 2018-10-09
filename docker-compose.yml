@@ -1,0 +1,13 @@
+version: '2'
+services:
+  duck-tracker:
+    build: ./
+    volumes:
+      - .:/go/src/github.com/bmanth60/DuckTracker
+    working_dir: /go/src/github.com/bmanth60/DuckTracker
+    command: ./dist/duck-tracker
+    expose:
+      - 80
+    environment:
+      PROJECT_NAME: duck-tracker
+      PROJECT_BUILD: dev

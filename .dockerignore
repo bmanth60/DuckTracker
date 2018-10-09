@@ -1,0 +1,16 @@
+# Exclude git from build
+.git/
+
+# Exclude existing builds
+dist/
+
+# Exclude existing vendors except for vendor json
+vendor/
+!vendor/vendor.json
+
+# Exclude docker related artifacts
+docker*
+Docker*
+
+# Exclude netrc credentials
+.netrc
