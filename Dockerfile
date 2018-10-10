@@ -14,6 +14,6 @@ COPY . ${PROJECT_PATH}
 WORKDIR ${PROJECT_PATH}
 
 # Create credentials file and sync
-# RUN make compile
+RUN make compile
 
 CMD ["/bin/sh", "-c", "${PROJECT_PATH}/${PROJECT_NAME}"]
