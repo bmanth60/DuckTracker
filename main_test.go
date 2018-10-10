@@ -14,7 +14,7 @@ func init() {
 }
 
 // Hook in test suite
-func TestIntegration(t *testing.T) {
+func TestFunctional(t *testing.T) {
 	suite.Run(t, new(FunctionalTestSuite))
 }
 

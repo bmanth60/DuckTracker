@@ -11,3 +11,4 @@ services:
     environment:
       PROJECT_NAME: duck-tracker
       PROJECT_BUILD: dev
+      DB_DSN:

@@ -9,10 +9,74 @@
 			"revisionTime": "2018-08-30T19:11:22Z"
 		},
 		{
+			"checksumSHA1": "WUlzRgGTkBG+BTvuOqettOxwnSM=",
+			"path": "github.com/golang-migrate/migrate",
+			"revision": "93d53a5ae84d81945eedadfe8f6865530d61d51c",
+			"revisionTime": "2018-09-05T05:18:49Z",
+			"version": "=v3.5.1",
+			"versionExact": "v3.5.1"
+		},
+		{
+			"checksumSHA1": "/+p+Vv7+iSwi1r5jI9vfrvpck1Y=",
+			"path": "github.com/golang-migrate/migrate/database",
+			"revision": "93d53a5ae84d81945eedadfe8f6865530d61d51c",
+			"revisionTime": "2018-09-05T05:18:49Z",
+			"version": "=v3.5.1",
+			"versionExact": "v3.5.1"
+		},
+		{
+			"checksumSHA1": "X9N5sX0vieHGUK0LsXopdmrd5ME=",
+			"path": "github.com/golang-migrate/migrate/database/postgres",
+			"revision": "93d53a5ae84d81945eedadfe8f6865530d61d51c",
+			"revisionTime": "2018-09-05T05:18:49Z",
+			"version": "=v3.5.1",
+			"versionExact": "v3.5.1"
+		},
+		{
+			"checksumSHA1": "/Zm1Z1U1w7pNdPY0H7vaG0SLmFQ=",
+			"path": "github.com/golang-migrate/migrate/source",
+			"revision": "93d53a5ae84d81945eedadfe8f6865530d61d51c",
+			"revisionTime": "2018-09-05T05:18:49Z",
+			"version": "=v3.5.1",
+			"versionExact": "v3.5.1"
+		},
+		{
+			"checksumSHA1": "+UCQeYrep6UWvMEhYOjH9pv08yc=",
+			"path": "github.com/golang-migrate/migrate/source/file",
+			"revision": "93d53a5ae84d81945eedadfe8f6865530d61d51c",
+			"revisionTime": "2018-09-05T05:18:49Z",
+			"version": "=v3.5.1",
+			"versionExact": "v3.5.1"
+		},
+		{
+			"checksumSHA1": "xvqMCXXlR74in/1c09UadpfXz9Y=",
+			"path": "github.com/lib/pq",
+			"revision": "4ded0e9383f75c197b3a2aaa6d590ac52df6fd79",
+			"revisionTime": "2018-08-23T06:29:44Z"
+		},
+		{
+			"checksumSHA1": "AU3fA8Sm33Vj9PBoRPSeYfxLRuE=",
+			"path": "github.com/lib/pq/oid",
+			"revision": "4ded0e9383f75c197b3a2aaa6d590ac52df6fd79",
+			"revisionTime": "2018-08-23T06:29:44Z"
+		},
+		{
+			"checksumSHA1": "DTy0iJ2w5C+FDsN9EnzfhNmvS+o=",
+			"path": "github.com/pkg/errors",
+			"revision": "2233dee583dcf88f3c8b22cb7a33f05a499800d8",
+			"revisionTime": "2018-10-08T04:53:15Z"
+		},
+		{
 			"checksumSHA1": "LuFv4/jlrmFNnDb/5SCSEPAM9vU=",
 			"path": "github.com/pmezard/go-difflib/difflib",
 			"revision": "792786c7400a136282c1664665ae0a8db921c6c2",
 			"revisionTime": "2016-01-10T10:55:54Z"
+		},
+		{
+			"checksumSHA1": "odKru9qdXJ+6HUaebZMZI6qCufc=",
+			"path": "github.com/rs/xid",
+			"revision": "15d26544def341f036c5f8dca987a4cbe575032c",
+			"revisionTime": "2018-08-30T17:51:11Z"
 		},
 		{
 			"checksumSHA1": "yEqObY2i8tbWEB4e/oVJDURhMf4=",

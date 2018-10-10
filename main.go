@@ -7,11 +7,13 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/bmanth60/DuckTracker/data"
 	"github.com/bmanth60/DuckTracker/types"
 )
 
 var (
-	gStatus chan string
+	gStatus   chan string
+	gDatabase *data.Database
 )
 
 func setSetupChannel(status chan string) chan string {
@@ -26,6 +28,19 @@ func getSetupChannel() chan string {
 func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Println(fmt.Sprintf("Project %s:%s", os.Getenv("PROJECT_NAME"), os.Getenv("PROJECT_BUILD")))
+
+	//Set up services
+	db, err := data.Connect()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = db.Migrate()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	gDatabase = db
 
 	log.Println("Starting server...")
 	//services := new(Services)
