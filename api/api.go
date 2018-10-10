@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"net/url"
 	"strconv"
 	"time"
@@ -62,11 +63,11 @@ func (a *API) HandleForm(form url.Values, add data.Set) []string {
 		return []string{err.Error()}
 	}
 
-	return nil
+	return []string{fmt.Sprintf("Successfully added id: %s", result.ID)}
 }
 
 func (a *API) ValidateDate(value string) (time.Time, error) {
-	format := "2006-01-02T15:04:05" //ISO8601 format
+	format := "2006-01-02T15:04"
 	return time.Parse(format, value)
 }
 
