@@ -1,6 +1,15 @@
 <html>
 <head>
        <title>Duck Tracker</title>
+       <style>
+           .input-container{
+               padding: 10px;
+           }
+
+           .input-container span{
+               font-weight: bold;
+           }
+       </style>
 </head>
 <body>
     <h1>{{ .Title }}</h1>
@@ -10,18 +19,34 @@
         {{ end }}
     </div>
     <form enctype="multipart/form-data" method="post">
-        <div>
-            {{ range $index, $name := .UploadNames }}
-                <div>
-                    <h2>{{ printf "%d. Upload %s" $index $name }}</h2>
-                    <input type="file" name="{{ $name }}" />
-                </div>
-            {{ end }}
+        <div class="input-container">
+            <span>Number of Ducks:</span>
+            <input type="number" name="num_ducks" min="0" />
+        </div>
+        <div class="input-container">
+            <span>Time Fed:</span>
+            <input type="datetime-local" name="time_fed" />
+        </div>
+        <div class="input-container">
+            <span>Location:</span>
+            <input type="text" name="location" />
+        </div>
+        <div class="input-container">
+            <span>Name of Food:</span>
+            <input type="text" name="food_name" />
+        </div>
+        <div class="input-container">
+            <span>Type of Food:</span>
+            <input type="text" name="food_kind" />
+        </div>
+        <div class="input-container">
+            <span>Amount of Food (lbs):</span>
+            <input type="number" name="food_amount" min="0" />
         </div>
         <br />
         <div>
             <input type="hidden" name="token" value="{{.Token}}" />
-            <input type="submit" value="import" />
+            <input type="submit" value="Add Entry" />
         </div>
     </form>
 </body>

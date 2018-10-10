@@ -24,9 +24,6 @@ all: setup
 setup:
 	docker-compose build
 	${RUN} make compile
-# Install the image and run the project
-install:
-	${RUN} bash -c "go build -o dist/${PROJECT_NAME} && ./dist/${PROJECT_NAME}"
 clean:
 	rm -rf reports/ dist/
 	docker-compose down -v --rmi all
@@ -42,6 +39,10 @@ run:
 compile: dep
 	mkdir -p dist
 	go build -o dist/${PROJECT_NAME}
+
+# serve go binary
+serve:
+	./dist/${PROJECT_NAME}
 
 # go dep
 dep:

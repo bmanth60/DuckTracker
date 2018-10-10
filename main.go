@@ -29,7 +29,7 @@ func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Println(fmt.Sprintf("Project %s:%s", os.Getenv("PROJECT_NAME"), os.Getenv("PROJECT_BUILD")))
 
-	//Set up services
+	log.Println("Starting database...")
 	db, err := data.Connect()
 	if err != nil {
 		log.Fatal(err)
@@ -57,7 +57,7 @@ func main() {
 }
 
 func ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	p := &types.Page{Title: "Hello World"}
+	p := &types.Page{Title: "Duck Tracker"}
 
 	// Run template
 	t, err := template.ParseFiles("presentation/index.html")
