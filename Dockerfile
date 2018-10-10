@@ -13,6 +13,6 @@ COPY . ${PROJECT_PATH}
 
 WORKDIR ${PROJECT_PATH}
 
-RUN make test && make compile
+RUN make compile
 
 CMD ["make", "serve"]
