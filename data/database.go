@@ -13,8 +13,8 @@ import (
 )
 
 type Database struct {
-	Db     *sql.DB
-	Helper *Helper
+	Db *sql.DB
+	*Helper
 }
 
 func Connect() (*Database, error) {

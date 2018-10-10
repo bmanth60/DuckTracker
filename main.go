@@ -2,18 +2,16 @@ package main
 
 import (
 	"fmt"
-	"html/template"
 	"log"
 	"net/http"
 	"os"
 
+	"github.com/bmanth60/DuckTracker/api"
 	"github.com/bmanth60/DuckTracker/data"
-	"github.com/bmanth60/DuckTracker/types"
 )
 
 var (
-	gStatus   chan string
-	gDatabase *data.Database
+	gStatus chan string
 )
 
 func setSetupChannel(status chan string) chan string {
@@ -40,12 +38,12 @@ func main() {
 		log.Fatal(err)
 	}
 
-	gDatabase = db
-
 	log.Println("Starting server...")
-	//services := new(Services)
+	handler := new(Handler)
+	handler.Db = db
+	handler.API = new(api.API)
 
-	http.HandleFunc("/", ServeHTTP)
+	http.Handle("/", handler)
 
 	setup := getSetupChannel()
 	if setup != nil {
@@ -54,17 +52,6 @@ func main() {
 
 	log.Println("Listening on port 80...")
 	log.Fatal(http.ListenAndServe(":80", logRequest(http.DefaultServeMux)))
-}
-
-func ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	p := &types.Page{Title: "Duck Tracker"}
-
-	// Run template
-	t, err := template.ParseFiles("presentation/index.html")
-	if err != nil {
-		log.Fatal(err)
-	}
-	t.Execute(w, p)
 }
 
 func logRequest(handler http.Handler) http.Handler {

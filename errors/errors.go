@@ -10,4 +10,6 @@ var (
 
 	//ErrDbNotConnected database connection cannot be established
 	ErrDbNotConnected = errors.New("database connection is not established")
+
+	ErrInvalidValue = errors.New("value is invalid")
 )

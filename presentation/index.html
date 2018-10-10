@@ -18,7 +18,7 @@
             <span>{{ $message }}</span></br>
         {{ end }}
     </div>
-    <form enctype="multipart/form-data" method="post">
+    <form method="post">
         <div class="input-container">
             <span>Number of Ducks:</span>
             <input type="number" name="num_ducks" min="0" />
@@ -45,7 +45,6 @@
         </div>
         <br />
         <div>
-            <input type="hidden" name="token" value="{{.Token}}" />
             <input type="submit" value="Add Entry" />
         </div>
     </form>
