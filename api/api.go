@@ -2,6 +2,7 @@ package api
 
 import (
 	"fmt"
+	"log"
 	"net/url"
 	"strconv"
 	"time"
@@ -60,7 +61,8 @@ func (a *API) HandleForm(form url.Values, add data.Set) []string {
 	result.ID = xid.New().String()
 	err = add(result)
 	if err != nil {
-		return []string{err.Error()}
+		log.Println(err)
+		return []string{dterr.ErrDbFailed.Error()}
 	}
 
 	return []string{fmt.Sprintf("Successfully added id: %s", result.ID)}

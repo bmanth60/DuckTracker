@@ -12,12 +12,19 @@ import (
 	_ "github.com/lib/pq"
 )
 
+var gDatabase *Database
+
 type Database struct {
-	Db *sql.DB
+	Db       *sql.DB
+	migrator *migrate.Migrate
 	*Helper
 }
 
 func Connect() (*Database, error) {
+	if gDatabase != nil {
+		return gDatabase, nil
+	}
+
 	db, err := sql.Open("postgres", getConfig().DatabaseDSN)
 	if err != nil {
 		db.Close()
@@ -30,17 +37,24 @@ func Connect() (*Database, error) {
 		return nil, errors.Wrap(err, "Couldn't ping postgres database")
 	}
 
-	return &Database{
+	gDatabase = &Database{
 		Db: db,
 		Helper: &Helper{
 			db: db,
 		},
-	}, nil
+	}
+
+	return gDatabase, nil
 }
 
-func (d *Database) Migrate() error {
+func (d *Database) initMigrator() error {
 	if d.Db == nil {
 		return dterr.ErrDbNotConnected
+	}
+
+	// Migrator has already been instantiated
+	if d.migrator != nil {
+		return nil
 	}
 
 	driver, err := postgres.WithInstance(d.Db, &postgres.Config{})
@@ -58,7 +72,46 @@ func (d *Database) Migrate() error {
 		return err
 	}
 
-	err = m.Up()
+	d.migrator = m
+
+	return nil
+}
+
+func (d *Database) Migrate() error {
+	err := d.initMigrator()
+	if err != nil {
+		return err
+	}
+
+	err = d.migrator.Up()
+	if err != nil && err != migrate.ErrNoChange {
+		return err
+	}
+
+	return nil
+}
+
+func (d *Database) Reset() error {
+	err := d.initMigrator()
+	if err != nil {
+		return err
+	}
+
+	err = d.migrator.Drop()
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (d *Database) Rollback() error {
+	err := d.initMigrator()
+	if err != nil {
+		return err
+	}
+
+	err = d.migrator.Down()
 	if err != nil && err != migrate.ErrNoChange {
 		return err
 	}
