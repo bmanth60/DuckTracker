@@ -11,11 +11,13 @@ import (
 	"github.com/bmanth60/DuckTracker/types"
 )
 
+//Handler http routing handler
 type Handler struct {
 	Db  *data.Database
 	API *api.API
 }
 
+//ServeHTTP serve the http request
 func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	var err error
 	switch {
@@ -35,6 +37,7 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+//HandleIndex handle index/root path requests
 func (h *Handler) HandleIndex(w http.ResponseWriter, r *http.Request) error {
 	p := &types.Page{Title: "Duck Tracker"}
 

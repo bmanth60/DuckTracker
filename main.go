@@ -11,14 +11,17 @@ import (
 )
 
 var (
+	//gStatus channel for server setup
 	gStatus chan string
 )
 
+//setSetupChannel set channel to detect when server has finished setting up
 func setSetupChannel(status chan string) chan string {
 	gStatus = status
 	return gStatus
 }
 
+//getSetupChannel get channel for piping messages relating to server setup
 func getSetupChannel() chan string {
 	return gStatus
 }
@@ -54,6 +57,7 @@ func main() {
 	log.Fatal(http.ListenAndServe(":80", logRequest(http.DefaultServeMux)))
 }
 
+//logRequest wrapper to log all inbound requests
 func logRequest(handler http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		log.Println(fmt.Sprintf("%s %s %s", r.RemoteAddr, r.Method, r.URL))

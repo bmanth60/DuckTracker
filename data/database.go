@@ -8,18 +8,26 @@ import (
 
 	"github.com/golang-migrate/migrate"
 	"github.com/golang-migrate/migrate/database/postgres"
+
+	// blank import to support the use of file:// connector
 	_ "github.com/golang-migrate/migrate/source/file"
+	// blank import to integrate the postgres driver to sql api
 	_ "github.com/lib/pq"
 )
 
-var gDatabase *Database
+var (
+	//gDatabase global variable for database singleton
+	gDatabase *Database
+)
 
+//Database object to handle database interactions
 type Database struct {
 	Db       *sql.DB
 	migrator *migrate.Migrate
 	*Helper
 }
 
+//Connect singleton to handle the databse connection pool
 func Connect() (*Database, error) {
 	if gDatabase != nil {
 		return gDatabase, nil
@@ -31,6 +39,9 @@ func Connect() (*Database, error) {
 		return nil, errors.Wrap(err, "Couldn't open connection to postgres database")
 	}
 
+	// Although the database connection pool has been created, golang
+	// does not actually attempt to connect to the database until we
+	// ping
 	err = db.Ping()
 	if err != nil {
 		db.Close()
@@ -47,12 +58,12 @@ func Connect() (*Database, error) {
 	return gDatabase, nil
 }
 
+//initMigrator initialize the migration library
 func (d *Database) initMigrator() error {
 	if d.Db == nil {
 		return dterr.ErrDbNotConnected
 	}
 
-	// Migrator has already been instantiated
 	if d.migrator != nil {
 		return nil
 	}
@@ -77,6 +88,7 @@ func (d *Database) initMigrator() error {
 	return nil
 }
 
+//Migrate runs all up migration scripts that have not yet been executed
 func (d *Database) Migrate() error {
 	err := d.initMigrator()
 	if err != nil {
@@ -91,6 +103,8 @@ func (d *Database) Migrate() error {
 	return nil
 }
 
+//Reset drops all tables in the database. Ideally, this should be abstracted
+//into a consolidated test tool to prevent accidental data loss
 func (d *Database) Reset() error {
 	err := d.initMigrator()
 	if err != nil {
@@ -105,6 +119,7 @@ func (d *Database) Reset() error {
 	return nil
 }
 
+//Rollback run all down migration scripts
 func (d *Database) Rollback() error {
 	err := d.initMigrator()
 	if err != nil {
@@ -119,6 +134,7 @@ func (d *Database) Rollback() error {
 	return nil
 }
 
+//Close database and prevent new queries from starting
 func (d *Database) Close() error {
 	if d.Db == nil {
 		return dterr.ErrDbNotConnected

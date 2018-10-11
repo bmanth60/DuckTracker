@@ -57,7 +57,7 @@ func (test *FunctionalTestSuite) TestGetRequest() {
 	// I want to get the form
 	// I expect to get 200 and a form in the html
 
-	client := getHttpClient()
+	client := getHTTPClient()
 	resp, err := client.Get("http://localhost:80/")
 	test.NoError(err)
 
@@ -76,7 +76,7 @@ func (test *FunctionalTestSuite) TestInvalidGetRequest() {
 	// I want to get an invalid url
 	// I expect to get 404
 
-	client := getHttpClient()
+	client := getHTTPClient()
 	resp, err := client.Get("http://localhost:80/badlink")
 	test.NoError(err)
 
@@ -88,7 +88,7 @@ func (test *FunctionalTestSuite) TestInvalidPutRequest() {
 	// I want to use an invalid method
 	// I expect to get 404
 
-	client := getHttpClient()
+	client := getHTTPClient()
 	req, err := http.NewRequest("PUT", "http://localhost:80/", nil)
 	test.NoError(err)
 
@@ -103,7 +103,7 @@ func (test *FunctionalTestSuite) TestInvalidPostDataRequest() {
 	// I want to use invalid form data
 	// I expect to get 500
 
-	client := getHttpClient()
+	client := getHTTPClient()
 	req, err := http.NewRequest("POST", "http://localhost:80/", strings.NewReader("data"))
 	req.Header.Set("Content-Type", "text/plain; boundary=")
 	test.NoError(err)
@@ -119,7 +119,7 @@ func (test *FunctionalTestSuite) TestPostRequest() {
 	// I want to insert my form into the database
 	// I expect to get 200 and a success message
 
-	client := getHttpClient()
+	client := getHTTPClient()
 	data := "num_ducks=5&time_fed=2018-10-11T10:11&location=park&food_amount=10&food_name=bread&food_kind=grains"
 	req, err := http.NewRequest("POST", "http://localhost:80/", strings.NewReader(data))
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")

@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-func getHttpClient() *http.Client {
+func getHTTPClient() *http.Client {
 	return &http.Client{
 		CheckRedirect: func(req *http.Request, via []*http.Request) error {
 			return http.ErrUseLastResponse

@@ -6,39 +6,15 @@ import (
 	"github.com/bmanth60/DuckTracker/types"
 )
 
+//Set function declaration for adding a data set
 type Set func(entry *types.Entry) error
 
+//Helper database access layer for accessing entries
 type Helper struct {
 	db *sql.DB
 }
 
-func (h *Helper) GetDuckEntries() (*types.Entry, error) {
-	query := `
-		SELECT
-			id,
-			fed_time,
-			food,
-			kind_of_food,
-			amount_of_food,
-			location,
-			number_of_ducks
-		FROM duck_entries
-	`
-
-	result := new(types.Entry)
-	err := h.db.QueryRow(query).Scan(
-		&result.ID,
-		&result.TimeFed,
-		&result.Food.Name,
-		&result.Food.Kind,
-		&result.AmountOfFood,
-		&result.Location,
-		&result.NumberOfDucks,
-	)
-
-	return result, err
-}
-
+//AddDuckEntry add a duck entry to the database
 func (h *Helper) AddDuckEntry(entry *types.Entry) error {
 	query := `
 		INSERT INTO duck_entries (

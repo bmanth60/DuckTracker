@@ -14,8 +14,10 @@ import (
 	"github.com/rs/xid"
 )
 
+//API handler for postback
 type API int
 
+//HandleForm handle form postback
 func (a *API) HandleForm(form url.Values, add data.Set) []string {
 	var err error
 	messages := []string{}
@@ -68,11 +70,13 @@ func (a *API) HandleForm(form url.Values, add data.Set) []string {
 	return []string{fmt.Sprintf("Successfully added id: %s", result.ID)}
 }
 
+//ValidateDate validate form date
 func (a *API) ValidateDate(value string) (time.Time, error) {
 	format := "2006-01-02T15:04"
 	return time.Parse(format, value)
 }
 
+//ValidateNumber validate form number
 func (a *API) ValidateNumber(value string) (int, error) {
 	if value == "" {
 		return -1, errors.Wrap(dterr.ErrInvalidValue, "value cannot be empty")
@@ -81,6 +85,7 @@ func (a *API) ValidateNumber(value string) (int, error) {
 	return strconv.Atoi(value)
 }
 
+//ValidateText validate form text fields
 func (a *API) ValidateText(value string) (string, error) {
 	if value == "" {
 		return "", errors.Wrap(dterr.ErrInvalidValue, "value cannot be empty")
