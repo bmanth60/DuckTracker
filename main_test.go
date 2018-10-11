@@ -71,7 +71,53 @@ func (test *FunctionalTestSuite) TestGetRequest() {
 	test.Contains(document, "form")
 }
 
+func (test *FunctionalTestSuite) TestInvalidGetRequest() {
+	// I am a request
+	// I want to get an invalid url
+	// I expect to get 404
+
+	client := getHttpClient()
+	resp, err := client.Get("http://localhost:80/badlink")
+	test.NoError(err)
+
+	test.Equal(http.StatusNotFound, resp.StatusCode)
+}
+
+func (test *FunctionalTestSuite) TestInvalidPutRequest() {
+	// I am a request
+	// I want to use an invalid method
+	// I expect to get 404
+
+	client := getHttpClient()
+	req, err := http.NewRequest("PUT", "http://localhost:80/", nil)
+	test.NoError(err)
+
+	resp, err := client.Do(req)
+	test.NoError(err)
+
+	test.Equal(http.StatusNotFound, resp.StatusCode)
+}
+
+func (test *FunctionalTestSuite) TestInvalidPostDataRequest() {
+	// I am a request
+	// I want to use invalid form data
+	// I expect to get 500
+
+	client := getHttpClient()
+	req, err := http.NewRequest("POST", "http://localhost:80/", strings.NewReader("data"))
+	req.Header.Set("Content-Type", "text/plain; boundary=")
+	test.NoError(err)
+
+	resp, err := client.Do(req)
+	test.NoError(err)
+
+	test.Equal(http.StatusInternalServerError, resp.StatusCode)
+}
+
 func (test *FunctionalTestSuite) TestPostRequest() {
+	// I am a form postback
+	// I want to insert my form into the database
+	// I expect to get 200 and a success message
 
 	client := getHttpClient()
 	data := "num_ducks=5&time_fed=2018-10-11T10:11&location=park&food_amount=10&food_name=bread&food_kind=grains"
